@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Organic Food Store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Banner Section -->
+    <div class="banner-container">
+        <div class="logo-container">
+            <img src="image/logo.jpeg" alt="Organic Food Logo" class="logo">
+        </div>
+        <h1 class="banner-title">Join Organic Food Store</h1>
+        <p class="banner-subtitle">Become part of a healthy, organic community!</p>
+    </div>
+
+    <!-- Registration Section -->
+    <div class="login-container">
+        <form action="php/register_user.php" method="POST" class="login-form">
+            <h2 class="form-title">Create Your Account</h2>
+            <!-- First Name Input -->
+            <input type="text" name="firstname" placeholder="First Name" required>
+            <!-- Last Name Input -->
+            <input type="text" name="lastname" placeholder="Last Name" required>
+            <!-- Username Input -->
+            <input type="text" name="username" placeholder="Username" required>
+            <!-- Email Input -->
+            <input type="email" name="email" placeholder="Email Address" required>
+            <!-- Phone Input -->
+            <input type="tel" name="phone" placeholder="Phone Number" required>
+            <!-- Password Input -->
+            <input type="password" name="password" placeholder="Password" required>
+            <!-- Confirm Password Input -->
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <!-- Register Button -->
+            <button type="submit" class="login-btn">Register</button>
+        </form>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup-message" id="popupMessage">
+        <p id="popupText"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer-container">
+        <p class="footer-text">Follow us on:</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank">
+                <img src="image/fb.jpeg" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="image/instagram.jpeg" alt="Instagram">
+            </a>
+            <a href="https://x.com" target="_blank">
+                <img src="image/x.jpeg" alt="X">
+            </a>
+        </div>
+        
+        <p class="footer-text">&copy; 2023 Organic Food Store. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Show popup message
+        function showPopup(message, isSuccess) {
+            const popup = document.getElementById('popupMessage');
+            const popupText = document.getElementById('popupText');
+            popupText.innerText = message;
+
+            // Apply success or error styles
+            popup.className = 'popup-message ' + (isSuccess ? 'success' : 'error');
+            popup.style.display = 'block';
+        }
+
+        // Close popup message
+        function closePopup() {
+            const popup = document.getElementById('popupMessage');
+            popup.style.display = 'none';
+        }
+
+        // Handle PHP response
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const message = urlParams.get('message');
+
+        if (status && message) {
+            showPopup(decodeURIComponent(message), status === 'success');
+        }
+    </script>
+</body>
+</html>

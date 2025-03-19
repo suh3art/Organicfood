@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Food Store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Banner Section -->
+    <div class="banner-container">
+        <div class="logo-container">
+            <img src="image/logo.jpeg" alt="Organic Food Logo" class="logo">
+        </div>
+        <h1 class="banner-title">Welcome to Organic Food Store</h1>
+        <p class="banner-subtitle">Fresh. Organic. Healthy.</p>
+    </div>
+
+    <!-- Login Section -->
+    <div class="login-container">
+        <form action="php/login.php" method="POST" class="login-form">
+            <h2 class="form-title">Login</h2>
+            <!-- Email Input -->
+            <input type="email" name="username_or_email" placeholder="Email Address" required>
+            <!-- Password Input -->
+            <input type="password" name="password" placeholder="Password" required>
+            <!-- Login Button -->
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <!-- Forget Password and Register Section Below Login -->
+        <div class="login-extra">
+            <a href="reset_password.html" class="forgot-password">Forgot Password?</a>
+            <p>New user? <a href="register.html" class="register-link">Register here</a></p>
+        </div>
+    </div>
+    
+    <!-- Popup Message -->
+    <div class="popup-message" id="popupMessage">
+        <p id="popupText"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+    
+
+    <!-- Footer Section -->
+    <footer class="footer-container">
+        <p class="footer-text">Follow us on:</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank">
+                <img src="image/fb.jpeg" alt="Facebook">
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img src="image/instagram.jpeg" alt="Instagram">
+            </a>
+            <a href="https://x.com" target="_blank">
+                <img src="image/x.jpeg" alt="X">
+            </a>
+        </div>
+        
+        <p class="footer-text">&copy; 2023 Organic Food Store. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+<script>
+    // Show popup message
+    function showPopup(message, isSuccess) {
+        const popup = document.getElementById('popupMessage');
+        const popupText = document.getElementById('popupText');
+        popupText.innerText = message;
+
+        // Apply success or error styles
+        popup.className = 'popup-message ' + (isSuccess ? 'success' : 'error');
+        popup.style.display = 'block';
+    }
+
+    // Close popup message
+    function closePopup() {
+        const popup = document.getElementById('popupMessage');
+        popup.style.display = 'none';
+    }
+
+    // Handle PHP response
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const message = urlParams.get('message');
+
+    if (status && message) {
+        showPopup(decodeURIComponent(message), status === 'success');
+    }
+</script>
